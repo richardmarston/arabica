@@ -11,7 +11,7 @@ jobs:
     name: A job to build the packages
     steps:
     - name: build it step
-      id: build it now
+      id: build-it-now
       uses: actions/arabica@v0.1
       with:
         commit: ${GITHUB_SHA}
