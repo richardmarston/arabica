@@ -10,13 +10,9 @@ jobs:
     runs-on: ubuntu-latest
     name: A job to build the packages
     steps:
-    - uses: actions/checkout@v2
-    - run:  mkdir /artifacts
-    - run:  rpmfile=$(find . -iname "*.rpm"); cp $rpmfile /artifacts
-    - run:  debfile=$(find . -iname "*.deb"); cp $debfile /artifacts
-    - uses: actions/upload-artifact@v2
+    - name: build it step
+      id: build it now
+      uses: actions/arabica@v0.1
       with:
-        name: arabica-pkgs
-        path: /artifacts
-
-
+        commit: ${GITHUB_SHA}
+        version: "0.1"
