@@ -17,17 +17,16 @@ runs:
     - ${{ inputs.commit }}
     - ${{ inputs.version }}
 
-
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v2
-    - run:  mkdir /artifacts
-    - run:  rpmfile=$(find . -iname "*.rpm"); cp $rpmfile /artifacts
-    - run:  debfile=$(find . -iname "*.deb"); cp $debfile /artifacts
+    - run:  mkdir artifacts
+    - run:  rpmfile=$(find . -iname "*.rpm"); cp $rpmfile artifacts
+    - run:  debfile=$(find . -iname "*.deb"); cp $debfile artifacts
     - uses: actions/upload-artifact@v2
       with:
         name: arabica-pkgs
-        path: /artifacts
+        path: artifacts
 
 
