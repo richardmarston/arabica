@@ -13,7 +13,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - uses: ubuntu-boost:latest
+    - uses: richardmarston/cpp-boost@latest
     - name: cmake
       run: cmake -DBUILD_SHARED_LIBS=ON
     - name: make
