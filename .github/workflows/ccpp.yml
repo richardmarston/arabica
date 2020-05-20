@@ -13,6 +13,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+    - name: pre
+      run: apt install libboost-dev
     - name: cmake
       run: cmake -DBUILD_SHARED_LIBS=ON
     - name: make
