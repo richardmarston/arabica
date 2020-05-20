@@ -17,7 +17,7 @@ jobs:
         commit: ${GITHUB_SHA}
         version: "0.1"
     - name: check commit
-      run:  echo "the commit id is ${{ inputs.commit }}"
+      run:  echo "the commit id is ${{ steps.build-it-now.inputs.commit }}"
     - name: get artifacts
       run:  mkdir artifacts; rpmfile=$(find . -iname "*.rpm"); debfile=$(find . -iname "*.deb"); cp $rpmfile $debfile artifacts
     - name: upload artifacts
