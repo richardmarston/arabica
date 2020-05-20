@@ -1,5 +1,7 @@
 name: Docker Image CI
-description: 'Build the container for creating libarabica packages'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
 
 on:
   push:
@@ -23,6 +25,4 @@ jobs:
         name: arabica-pkgs
         path: /artifacts
 
-runs:
-  using: 'docker'
-  image: 'Dockerfile'
+
