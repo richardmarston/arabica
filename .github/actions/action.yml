@@ -2,7 +2,7 @@
 name: Docker Image CI
 description: 'Create package'
 inputs:
-  commit-id:
+  commit:
     description: 'git commit sha'
     required: true
     default: 'World'
@@ -16,18 +16,4 @@ runs:
   args:
     - ${{ inputs.commit }}
     - ${{ inputs.version }}
-
-    runs-on: ubuntu-latest
-
-    steps:
-    - uses: actions/checkout@v2
-    - run:  mkdir artifacts
-    - run:  echo "the commit id is ${{ inputs.commit }}"
-    - run:  rpmfile=$(find . -iname "*.rpm"); cp $rpmfile artifacts
-    - run:  debfile=$(find . -iname "*.deb"); cp $debfile artifacts
-    - uses: actions/upload-artifact@v2
-      with:
-        name: arabica-pkgs
-        path: artifacts
-
 
