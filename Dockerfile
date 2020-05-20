@@ -1,4 +1,4 @@
 from ubuntu:latest
 
 run apt-get update
-run apt-get install libboost-dev
+run apt-get -y install libboost-dev
