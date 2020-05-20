@@ -9,12 +9,11 @@ on:
 jobs:
   build:
 
-    runs-on: ubuntu-boost:latest
+    runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v2
-    - name: pre
-      run: apt install libboost-dev
+    - uses: ubuntu-boost:latest
     - name: cmake
       run: cmake -DBUILD_SHARED_LIBS=ON
     - name: make
