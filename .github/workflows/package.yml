@@ -13,7 +13,7 @@ jobs:
     - name: build it step
       id: build-it-now
     - uses: actions/checkout@v2
-      uses: richardmarston/arabica@ac4ec791b3d0f0186c8cbcf8939018bb99550bed
+      uses: richardmarston/arabica@2dffcb3218723b5ec21acf24a2dba1fb10dfc3c4
       with:
         commit: ${GITHUB_SHA}
         version: "0.1"
