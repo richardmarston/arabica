@@ -12,17 +12,17 @@ jobs:
     steps:
     - name: build it step
       id: build-it-now
-    - uses: actions/checkout@v2
+      uses: actions/checkout@v2
       uses: richardmarston/arabica@2dffcb3218723b5ec21acf24a2dba1fb10dfc3c4
       with:
         commit: ${GITHUB_SHA}
         version: "0.1"
     - name: check commit
-    - run:  echo "the commit id is ${{ inputs.commit }}"
+      run:  echo "the commit id is ${{ inputs.commit }}"
     - name: get artifacts
-    - run:  mkdir artifacts; rpmfile=$(find . -iname "*.rpm"); debfile=$(find . -iname "*.deb"); cp $rpmfile $debfile artifacts
+      run:  mkdir artifacts; rpmfile=$(find . -iname "*.rpm"); debfile=$(find . -iname "*.deb"); cp $rpmfile $debfile artifacts
     - name: upload artifacts
-    - uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v2
       with:
         name: arabica-pkgs
         path: artifacts
