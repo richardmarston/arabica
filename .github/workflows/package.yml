@@ -12,7 +12,7 @@ jobs:
     steps:
     - name: build it step
       id: build-it-now
-      uses: actions/arabica@release/v1
+      uses: actions/arabica@59e4bb8da0612206eec17999d0e80d4a3cc2aa8e
       with:
         commit: ${GITHUB_SHA}
         version: "0.1"
