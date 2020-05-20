@@ -1,4 +1,5 @@
 name: Docker Image CI
+description: 'Build the container for creating libarabica packages'
 
 on:
   push:
@@ -14,5 +15,14 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag ubuntu-boost:$(date +%s) --tag ubuntu-boost:latest
+    - run:  mkdir /artifacts
+    - run:  rpmfile=$(find . -iname "*.rpm"); cp $rpmfile /artifacts
+    - run:  debfile=$(find . -iname "*.deb"); cp $debfile /artifacts
+    - uses: actions/upload-artifact@v2
+      with:
+        name: arabica-pkgs
+        path: /artifacts
+
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
