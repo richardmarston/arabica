@@ -12,4 +12,4 @@ run apk add cmake expat-dev rpm
 run cmake -DBUILD_SHARED_LIBS=ON ..
 run cpack
 
-entrypoint [ "/bin/sh", "echo commit $1 version $2" ]
+entrypoint [ "/bin/sh", "echo", "commit $6 version $7" ]
