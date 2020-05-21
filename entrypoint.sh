@@ -8,7 +8,7 @@ cd build
 cmake -DBUILD_SHARED_LIBS=ON ..
 cpack
 echo $(pwd)
-RPM=$(find . -iname '*.rpm')
-DEB=$(find . -iname '*.deb')
+RPM=$(find build -maxdepth 1 -iname '*.rpm')
+DEB=$(find build -maxdepth 1 -iname '*.deb')
 echo "rpm: ${RPM}"
 echo "deb: ${DEB}"
