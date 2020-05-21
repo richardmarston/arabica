@@ -1,7 +1,7 @@
 #!/bin/sh
 
 echo commit ${INPUT_COMMIT} version ${INPUT_VERSION}
-echo commit $1 version $2
+echo commit ${GITHUB_SHA} version $2
 cd /github/workspace
 mkdir build
 cd build
