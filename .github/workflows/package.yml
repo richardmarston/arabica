@@ -13,11 +13,10 @@ jobs:
     - name: build it step
       id: build-it-now
       uses: richardmarston/arabica@2dffcb3218723b5ec21acf24a2dba1fb10dfc3c4
+      run:  echo "the commit id is ${{ steps.build-it-now.inputs.commit }}"
       with:
         commit: ${GITHUB_SHA}
         version: "0.1"
-    - name: check commit
-      run:  echo "the commit id is ${{ steps.build-it-now.inputs.commit }}"
     - name: get artifacts
       run:  mkdir artifacts; rpmfile=$(find . -iname "*.rpm"); debfile=$(find . -iname "*.deb"); cp $rpmfile $debfile artifacts
     - name: upload artifacts
