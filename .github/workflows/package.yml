@@ -10,8 +10,10 @@ jobs:
     runs-on: ubuntu-latest
     name: A job to build the packages
     steps:
+    - name: checkout
+      uses: actions/checkout@v2
     - name: build it step
-      id: build-it-now
+      id:   build-it-now
       uses: richardmarston/arabica@64152a97
       with:
         commit: ${GITHUB_SHA}
