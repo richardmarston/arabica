@@ -24,19 +24,21 @@ jobs:
         rpmfile:
           description:
             "The name of the rpm file"
+    - name: UploadRPM
+      needs: FindRPM
+      uses: actions/upload-artifact@v2
+      with:
+        name: rpm
+        path: ${{ needs.FindRPM.outputs.rpmfile }}
     - name: FindDEB
       run:  DEBFILE=$(find build -maxdepth 1 -iname '*.rpm'); echo ${DEBFILE};
       ouputs:
         debfile:
           description:
             "The name of the deb file"
-    - name: upload rpm
-      uses: actions/upload-artifact@v2
-      with:
-        name: rpm
-        path: ${{ steps.FindRPM.outputs.rpmfile }}
     - name: upload deb
+      needs: FindDEB
       uses: actions/upload-artifact@v2
       with:
         name: deb
-        path: ${{ steps.FindDEB.outputs.debfile }}
+        path: ${{ needs.FindDEB.outputs.debfile }}
