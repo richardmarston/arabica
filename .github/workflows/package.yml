@@ -18,15 +18,16 @@ jobs:
       run:  echo $(pwd)
     - name: build it step
       id:   build-it-now
-      #uses: richardmarston/arabica@64152a97
       uses: ./
       with:
         commit: ${GITHUB_SHA}
         version: "0.1"
     - name: get artifacts
-      run:  ls; mkdir artifacts; RPMFILE=$(find build -maxdepth 1 -iname '*.rpm'); echo ${RPMFILE}; DEBFILE=$(find build -maxdepth 1 -iname '*.deb'); echo $DEBFILE; cp $RPMFILE $DEBFILE artifacts
+      run:  mkdir debpkg; mkdir rpmpkg; RPMFILE=$(find build -maxdepth 1 -iname '*.rpm'); DEBFILE=$(find build -maxdepth 1 -iname '*.deb'); cp $RPMFILE rpmpkg; $DEBFILE debpkg;
     - name: upload artifacts
       uses: actions/upload-artifact@v2
       with:
-        name: arabica-pkgs
-        path: artifacts
+        name: rpm
+        path: rpmpkg
+        name: deb
+        path: debpkg
