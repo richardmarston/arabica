@@ -46,8 +46,8 @@ jobs:
         commit: ${GITHUB_SHA}
         version: "0.1"
     - name: find rpm in workspace
-        env:
-          GITHUB_WS: ${{ github.workspace }}
+      env:
+        GITHUB_WS: ${{ github.workspace }}
       run: echo $(find ${GITHUB_WS} -iname "*.rpm")
     - name: UploadRPM
       uses: actions/upload-artifact@v2
