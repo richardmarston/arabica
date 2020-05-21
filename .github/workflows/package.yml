@@ -58,13 +58,30 @@ jobs:
         path: ${GITHUB_WS}/build/[!_]*.rpm
     - name: find deb
       run: echo $(find ${GITHUB_WS} -iname "*.deb")
+
     - name: UploadDEB
       uses: actions/upload-artifact@v2
       env:
         GITHUB_WS: ${{ github.workspace }}
       with:
         name: deb
-        path: ${GITHUB_WS}/build/[!_]*.deb
+        path: /home/runner/work/arabica/arabica/build/!_*.deb
+
+    - name: UploadDEB1
+      uses: actions/upload-artifact@v2
+      env:
+        GITHUB_WS: ${{ github.workspace }}
+      with:
+        name: deb
+        path: /home/runner/work/arabica/arabica/build/*.deb
+
+    - name: UploadDEB2
+      uses: actions/upload-artifact@v2
+      env:
+        GITHUB_WS: ${{ github.workspace }}
+      with:
+        name: deb
+        path: /home/runner/work/arabica/arabica/build/[!/]*.deb
 
     - name: UploadDE1B
       uses: actions/upload-artifact@v2
