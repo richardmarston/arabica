@@ -64,4 +64,3 @@ jobs:
       with:
         name: rpm
         path: /github/workspace/build/[a-zA-Z\-0-9]*.rpm
-        path: ${{ needs.find_job.outputs.rpmfile }}
