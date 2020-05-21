@@ -20,13 +20,13 @@ jobs:
         version: "0.1"
   find_job:
     runs-on: ubuntu-latest
-    ouputs:
-      rpmfile:
-        description:
-          "The name of the rpm file"
-      debfile:
-        description:
-            "The name of the debfile"
+    #    ouputs:
+    #  rpmfile:
+    #    description:
+    #      "The name of the rpm file"
+    #  debfile:
+    #    description:
+    #        "The name of the debfile"
     name: A job to identify the packages
     steps:
     - name: FindRPM
@@ -49,13 +49,13 @@ jobs:
         STEPS_CONTEXT: ${{ toJson(steps) }}
       run: echo "$STEPS_CONTEXT"
     - name: upload deb
-      needs: FindDEB
+      #needs: FindDEB
       uses: actions/upload-artifact@v2
       with:
         name: deb
         path: ${{ needs.find_job.outputs.debfile }}
     - name: UploadRPM
-      needs: FindRPM
+      #  needs: FindRPM
       uses: actions/upload-artifact@v2
       with:
         name: rpm
