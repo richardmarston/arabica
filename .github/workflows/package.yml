@@ -24,11 +24,18 @@ jobs:
         GITHUB_WS: ${{ github.workspace }}
       with:
         name: rpm
-        path: ${GITHUB_WS}/build/*.rpm
+        path: $GITHUB_WS/build/*.rpm
+    - name: UploadRPM1
+      uses: actions/upload-artifact@v2
+      env:
+        GITHUB_WS: ${{ github.workspace }}
+      with:
+        name: rpm
+        path: "$GITHUB_WS/build/*.rpm"
     - name: UploadDEB
       uses: actions/upload-artifact@v2
       env:
         GITHUB_WS: ${{ github.workspace }}
       with:
         name: deb
-        path: ${GITHUB_WS}/build/*.deb
+        path: ${{ github.workspace }}/build/*.deb
