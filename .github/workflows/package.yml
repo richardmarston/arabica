@@ -19,6 +19,7 @@ jobs:
         commit: ${GITHUB_SHA}
         version: "0.1"
   find_job:
+    runs-on: ubuntu-latest
     name: A job to identify the packages
     steps:
     - name: FindRPM
@@ -33,6 +34,7 @@ jobs:
         description:
             "The name of the debfile"
   upload_job:
+    runs-on: ubuntu-latest
     steps:
     - name: upload deb
       needs: FindDEB
