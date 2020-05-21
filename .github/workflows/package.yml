@@ -12,6 +12,10 @@ jobs:
     steps:
     - name: checkout
       uses: actions/checkout@v2
+    - name: list stuff
+      run:  ls
+    - name: where am i
+      run:  echo $(pwd)
     - name: build it step
       id:   build-it-now
       #uses: richardmarston/arabica@64152a97
