@@ -24,7 +24,7 @@ jobs:
         commit: ${GITHUB_SHA}
         version: "0.1"
     - name: get artifacts
-      run:  mkdir artifacts; rpmfile=$(find . -iname "*.rpm"); debfile=$(find . -iname "*.deb"); cp $rpmfile $debfile artifacts
+      run:  ls; mkdir artifacts; rpmfile=$(find . -iname "*.rpm"); echo $rpmfile; debfile=$(find . -iname "*.deb"); echo $debfile; cp $rpmfile $debfile artifacts
     - name: upload artifacts
       uses: actions/upload-artifact@v2
       with:
