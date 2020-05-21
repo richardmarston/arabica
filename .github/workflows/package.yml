@@ -24,10 +24,13 @@ jobs:
         version: "0.1"
     - name: get artifacts
       run:  mkdir debpkg; mkdir rpmpkg; RPMFILE=$(find build -maxdepth 1 -iname '*.rpm'); DEBFILE=$(find build -maxdepth 1 -iname '*.deb'); cp $RPMFILE rpmpkg; $DEBFILE debpkg;
-    - name: upload artifacts
+    - name: upload rpm
       uses: actions/upload-artifact@v2
       with:
         name: rpm
         path: rpmpkg
+    - name: upload deb
+      uses: actions/upload-artifact@v2
+      with:
         name: deb
         path: debpkg
