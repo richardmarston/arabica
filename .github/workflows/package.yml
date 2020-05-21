@@ -20,12 +20,6 @@ jobs:
         version: "0.1"
   find_job:
     runs-on: ubuntu-latest
-    name: A job to identify the packages
-    steps:
-    - name: FindRPM
-      run:  RPMFILE=$(find build -maxdepth 1 -iname '*.rpm'); echo ${RPMFILE};
-    - name: FindDEB
-      run:  DEBFILE=$(find build -maxdepth 1 -iname '*.rpm'); echo ${DEBFILE}; echo "::set-output name=rpmfile::${RPMFILE}"
     ouputs:
       rpmfile:
         description:
@@ -33,6 +27,12 @@ jobs:
       debfile:
         description:
             "The name of the debfile"
+    name: A job to identify the packages
+    steps:
+    - name: FindRPM
+      run:  RPMFILE=$(find build -maxdepth 1 -iname '*.rpm'); echo ${RPMFILE};
+    - name: FindDEB
+      run:  DEBFILE=$(find build -maxdepth 1 -iname '*.rpm'); echo ${DEBFILE}; echo "::set-output name=rpmfile::${RPMFILE}"
   upload_job:
     runs-on: ubuntu-latest
     steps:
