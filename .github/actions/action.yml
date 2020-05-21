@@ -1,19 +1,7 @@
 
 name: Docker Image CI
 description: 'Create package'
-inputs:
-  commitsha:
-    description: 'git commit sha'
-    required: true
-    default: 'World'
-  versionnum:
-    description: 'version number'
-    required: true
-    default: '0.1'
 runs:
   using: 'docker'
   image: 'Dockerfile'
-  args:
-    - ${{ inputs.commitsha }}
-    - ${{ inputs.versionnum }}
 
