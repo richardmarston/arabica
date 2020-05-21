@@ -16,8 +16,8 @@ jobs:
       id:   build-it-now
       uses: ./
       with:
-        commit: ${{ github.sha }}
-        version: "0.1"
+        commitsha: 555555 #${{ github.sha }}
+        versionnum: "0.1"
     - name: UploadRPM
       uses: actions/upload-artifact@v2
       with:
