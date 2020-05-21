@@ -18,27 +18,31 @@ jobs:
       with:
         commit: ${GITHUB_SHA}
         version: "0.1"
+  find_job:
+    name: A job to identify the packages
+    steps:
     - name: FindRPM
       run:  RPMFILE=$(find build -maxdepth 1 -iname '*.rpm'); echo ${RPMFILE};
-      ouputs:
-        rpmfile:
-          description:
-            "The name of the rpm file"
-    - name: UploadRPM
-      needs: FindRPM
-      uses: actions/upload-artifact@v2
-      with:
-        name: rpm
-        path: ${{ needs.FindRPM.outputs.rpmfile }}
     - name: FindDEB
-      run:  DEBFILE=$(find build -maxdepth 1 -iname '*.rpm'); echo ${DEBFILE};
-      ouputs:
-        debfile:
-          description:
-            "The name of the deb file"
+      run:  DEBFILE=$(find build -maxdepth 1 -iname '*.rpm'); echo ${DEBFILE}; echo "::set-output name=rpmfile::${RPMFILE}"
+    ouputs:
+      rpmfile:
+        description:
+          "The name of the rpm file"
+      debfile:
+        description:
+            "The name of the debfile"
+  upload_job:
+    steps:
     - name: upload deb
       needs: FindDEB
       uses: actions/upload-artifact@v2
       with:
         name: deb
-        path: ${{ needs.FindDEB.outputs.debfile }}
+        path: ${{ needs.find_job.outputs.debfile }}
+    - name: UploadRPM
+      needs: FindRPM
+      uses: actions/upload-artifact@v2
+      with:
+        name: rpm
+        path: ${{ needs.find_job.outputs.rpmfile }}
