@@ -55,7 +55,7 @@ jobs:
         GITHUB_WS: ${{ github.workspace }}
       with:
         name: rpm
-        path: ${GITHUB_WS}/build/[a-zA-Z\-0-9]*.rpm
+        path: ${GITHUB_WS}/build/[!_]*.rpm
     - name: find deb
       run: echo $(find /github/workspace -iname "*.deb")
     - name: UploadDEB
@@ -64,4 +64,4 @@ jobs:
         GITHUB_WS: ${{ github.workspace }}
       with:
         name: deb
-        path: ${GITHUB_WS}/build/[a-zA-Z\-0-9]*.deb
+        path: ${GITHUB_WS}/build/[!_]*.deb
