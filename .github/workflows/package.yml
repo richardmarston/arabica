@@ -10,27 +10,33 @@ jobs:
     runs-on: ubuntu-latest
     name: A job to build the packages
     steps:
-    - name: checkout
+    - name: Checkout
       uses: actions/checkout@v2
-    - name: list stuff
-      run:  ls
-    - name: where am i
-      run:  echo $(pwd)
-    - name: build it step
+    - name: Build
       id:   build-it-now
       uses: ./
       with:
         commit: ${GITHUB_SHA}
         version: "0.1"
-    - name: get artifacts
-      run:  mkdir debpkg; mkdir rpmpkg; RPMFILE=$(find build -maxdepth 1 -iname '*.rpm'); DEBFILE=$(find build -maxdepth 1 -iname '*.deb'); cp $RPMFILE rpmpkg; $DEBFILE debpkg;
+    - name: FindRPM
+      run:  RPMFILE=$(find build -maxdepth 1 -iname '*.rpm'); echo ${RPMFILE};
+      ouputs:
+        rpmfile:
+          description:
+            "The name of the rpm file"
+    - name: FindDEB
+      run:  DEBFILE=$(find build -maxdepth 1 -iname '*.rpm'); echo ${DEBFILE};
+      ouputs:
+        debfile:
+          description:
+            "The name of the deb file"
     - name: upload rpm
       uses: actions/upload-artifact@v2
       with:
         name: rpm
-        path: rpmpkg
+        path: ${{ steps.FindRPM.outputs.rpmfile }}
     - name: upload deb
       uses: actions/upload-artifact@v2
       with:
         name: deb
-        path: debpkg
+        path: ${{ steps.FindDEB.outputs.debfile }}
