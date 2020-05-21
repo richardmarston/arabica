@@ -1,6 +1,9 @@
 
 from alpine:latest
 
+echo "commit $1"
+echo "version $2"
+
 run apk update
 run apk add boost-dev g++ make
 
