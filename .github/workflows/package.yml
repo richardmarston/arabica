@@ -45,17 +45,23 @@ jobs:
       with:
         commit: ${GITHUB_SHA}
         version: "0.1"
-    - name: find rpm
-      run: echo $(find /github/workspace -iname "*.rpm")
+    - name: find rpm in workspace
+        env:
+          GITHUB_WS: ${{ github.workspace }}
+      run: echo $(find ${GITHUB_WS} -iname "*.rpm")
+    - name: UploadRPM
+      uses: actions/upload-artifact@v2
+      env:
+        GITHUB_WS: ${{ github.workspace }}
+      with:
+        name: rpm
+        path: ${GITHUB_WS}/build/[a-zA-Z\-0-9]*.rpm
     - name: find deb
       run: echo $(find /github/workspace -iname "*.deb")
     - name: UploadDEB
       uses: actions/upload-artifact@v2
+      env:
+        GITHUB_WS: ${{ github.workspace }}
       with:
         name: deb
-        path: /github/workspace/build/[a-zA-Z\-0-9]*.deb
-    - name: UploadRPM
-      uses: actions/upload-artifact@v2
-      with:
-        name: rpm
-        path: /github/workspace/build/[a-zA-Z\-0-9]*.rpm
+        path: ${GITHUB_WS}/build/[a-zA-Z\-0-9]*.deb
