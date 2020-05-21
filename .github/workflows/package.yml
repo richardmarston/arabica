@@ -26,13 +26,17 @@ jobs:
       debfile:
     name: A job to identify the packages
     steps:
+    - name: list
+      run: ls
+    - name: where
+      run: echo $(pwd)
     - name: FindRPM
       run:  RPMFILE=$(find build -maxdepth 1 -iname '*.rpm'); echo ${RPMFILE}; echo "::set-output name=rpmfile::${RPMFILE}"
     - name: FindDEB
       run:  DEBFILE=$(find build -maxdepth 1 -iname '*.rpm'); echo ${DEBFILE}; echo "::set-output name=debfile::${DEBFILE}"
   upload_job:
     runs-on: ubuntu-latest
-    needs: find_job
+    needs: package_job
     steps:
     - name: Dump GitHub context
       env:
@@ -46,14 +50,18 @@ jobs:
       env:
         STEPS_CONTEXT: ${{ toJson(steps) }}
       run: echo "$STEPS_CONTEXT"
-    - name: upload deb
-      #needs: FindDEB
+    - name: find rpm
+      run: echo $(find /github/workspace -iname "*.rpm")
+    - name: find deb
+      run: echo $(find /github/workspace -iname "*.deb")
+    - name: UploadDEB
       uses: actions/upload-artifact@v2
       with:
         name: deb
-        path: ${{ needs.find_job.outputs.debfile }}
+        path: /github/workspace/build/[a-zA-Z\-0-9]*.deb
     - name: UploadRPM
       uses: actions/upload-artifact@v2
       with:
         name: rpm
+        path: /github/workspace/build/[a-zA-Z\-0-9]*.rpm
         path: ${{ needs.find_job.outputs.rpmfile }}
