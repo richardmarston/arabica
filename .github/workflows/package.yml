@@ -40,6 +40,6 @@ jobs:
         with:
           name: rpm
       - name: Display structure of downloaded files
-        run: ls -R
+        run: ls -l /home/runner/work/arabica/arabica
         #- name: Release
         #uses: softprops/action-gh-release@v1
