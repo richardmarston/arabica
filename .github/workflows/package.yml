@@ -34,12 +34,11 @@ jobs:
     needs: package
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - uses: actions/download-artifact@v2
-        with:
-          name: rpm
-      - name: Display structure of downloaded files
-        run: ls -l /home/runner/work/arabica/arabica
-        #- name: Release
-        #uses: softprops/action-gh-release@v1
+    - name: GetArtifact
+      uses: actions/download-artifact@v2
+      with:
+        name: rpm
+    - name: Display structure of downloaded files
+      run: ls -l /home/runner/work/arabica/arabica
+      #- name: Release
+      #uses: softprops/action-gh-release@v1
