@@ -42,9 +42,15 @@ jobs:
       uses: actions/download-artifact@v2
     - name: Display structure of downloaded files
       run: ls -l /home/runner/work/arabica/arabica
+    - name: Display structure of rpm
+      run: ls -l /home/runner/work/arabica/arabica/rpm
+    - name: Display structure of deb
+      run: ls -l /home/runner/work/arabica/arabica/deb
     - name: Release
       uses: softprops/action-gh-release@v1
       with:
-        files: rpm
+        files: |
+          rpm/*
+          deb/*
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
