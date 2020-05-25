@@ -48,3 +48,5 @@ jobs:
         files: |
           libarabica-2016-Linux.rpm
           libarabica-2016-Linux.deb
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
