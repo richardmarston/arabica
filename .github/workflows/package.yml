@@ -45,8 +45,6 @@ jobs:
     - name: Release
       uses: softprops/action-gh-release@v1
       with:
-        files: |
-          rpm
-          deb
+        files: [ rpm, deb ]
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
