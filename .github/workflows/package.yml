@@ -1,12 +1,17 @@
 name: package build workflow
+#on:
+#  push:
+#    branches: [ master, github-build-action ]
+#  pull_request:
+#    branches: [ master ]
+
 on:
   push:
-    branches: [ master, github-build-action ]
-  pull_request:
-    branches: [ master ]
+    tags:
+      - 'release/v*'
 
 jobs:
-  package_job:
+  package:
     runs-on: ubuntu-latest
     name: A job to build the packages
     steps:
@@ -25,3 +30,15 @@ jobs:
       with:
         name: deb
         path: ${{ github.workspace }}/build/*.deb
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - uses: actions/download-artifact@v2
+        with:
+          name: rpm
+      - name: Display structure of downloaded files
+        run: ls -R
+        #- name: Release
+        #uses: softprops/action-gh-release@v1
