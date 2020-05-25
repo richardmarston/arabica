@@ -45,6 +45,6 @@ jobs:
     - name: Release
       uses: softprops/action-gh-release@v1
       with:
-        files:
-          - libarabica-2016-Linux.rpm
-          - libarabica-2016-Linux.deb
+        files: |
+          libarabica-2016-Linux.rpm
+          libarabica-2016-Linux.deb
