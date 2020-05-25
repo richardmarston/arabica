@@ -40,9 +40,6 @@ jobs:
     steps:
     - name: GetArtifact
       uses: actions/download-artifact@v2
-      with:
-        - name: rpm
-        - name: deb
     - name: Display structure of downloaded files
       run: ls -l /home/runner/work/arabica/arabica
     - name: Release
